@@ -7,6 +7,12 @@ use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\ClienteController;
+
+Route::middleware('auth')->group(function () {
+    Route::resource('clientes', ClienteController::class);
+});
+
 
 Route::middleware('auth')->group(function () {
         Route::resource('usuarios', AdminUserController::class);

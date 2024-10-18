@@ -69,7 +69,11 @@
         </div>
         <div class="form-group">
             <label for="nombre_cliente" class="form-label">Nombre del Cliente</label>
-            <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" required>
+            <select class="form-control" id="nombre_cliente" name="nombre_cliente" required>
+                @foreach($clientes as $cliente)
+                    <option value="{{ $cliente->nombre}} {{$cliente->apellido}}">{{ $cliente->nombre}} {{$cliente->apellido}}</option>
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>

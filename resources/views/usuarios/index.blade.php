@@ -9,7 +9,7 @@
         background-color: #ffffff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    .container h1 {
+    h1 {
         margin-bottom: 20px;
         font-size: 2rem;
         text-align: center;
@@ -66,91 +66,34 @@
     .btn-danger:hover {
         background-color: #c82333;
     }
-
-    /* Estilos para la ventana emergente */
-    .popup {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-    }
-    .popup-content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        text-align: center;
-    }
-    .popup-content button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .btn-cancel {
-        background-color: #dc3545;
-        color: #fff;
-    }
-    .btn-confirm {
-        background-color: #28a745;
-        color: #fff;
-    }
 </style>
 <div class="container">
-    <h1>Administrar Usuarios</h1>
+    <h1>Administrar Clientes</h1>
+    <a href="{{ route('clientes.create') }}" class="btn-primary">Agregar Cliente</a>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
-                <th>Rol</th>
-                <th>Email</th>
+                <th>Apellido</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($usuarios as $usuario)
+            @foreach ($clientes as $cliente)
                 <tr>
-                    <td>{{ $usuario->id }}</td>
-                    <td>{{ $usuario->nombre }}</td>
-                    <td>{{ $usuario->rol }}</td>
-                    <td>{{ $usuario->email }}</td>
+                    <td>{{ $cliente->nombre }}</td>
+                    <td>{{ $cliente->apellido }}</td>
                     <td>
-                        <a href="{{ route('usuarios.edit', $usuario) }}" class="btn-success">Editar</a>
-                        <button class="btn-danger" onclick="showPopup({{ $usuario->id }})">Eliminar</button>
+                        <a href="{{ route('clientes.edit', $cliente) }}" class="btn-success">Editar</a>
+                        <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-danger">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('usuarios.create') }}" class="btn-primary">Agregar Usuario</a>
 </div>
-
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <p>¿Estás seguro de que deseas eliminar este usuario?</p>
-        <form id="form-delete" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn-confirm">Aceptar</button>
-            <button type="button" class="btn-cancel" onclick="hidePopup()">Cancelar</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    function showPopup(id) {
-        document.getElementById('form-delete').action = `usuarios/${id}`;
-        document.getElementById('popup').style.display = 'flex';
-    }
-
-    function hidePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
-</script>
 @endsection

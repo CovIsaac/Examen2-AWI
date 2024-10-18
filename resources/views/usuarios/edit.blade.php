@@ -46,32 +46,17 @@
     }
 </style>
 <div class="container">
-    <h1>Editar Usuario</h1>
-    <form action="{{ route('usuarios.update', $usuario) }}" method="POST">
+    <h1>Editar Cliente</h1>
+    <form action="{{ route('clientes.update', $cliente) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $usuario->nombre }}" required>
+            <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $cliente->nombre }}" required>
         </div>
         <div class="form-group">
-            <label for="rol">Rol</label>
-            <select name="rol" id="rol" class="form-control" required>
-                <option value="admin" {{ $usuario->rol == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="bibliotecario" {{ $usuario->rol == 'bibliotecario' ? 'selected' : '' }}>Bibliotecario</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ $usuario->email }}" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Contraseña (dejar en blanco para no cambiarla)</label>
-            <input type="password" name="password" id="password" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password_confirmation">Confirmar Contraseña</label>
-            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+            <label for="apellido">Apellido</label>
+            <input type="text" name="apellido" id="apellido" class="form-control" value="{{ $cliente->apellido }}" required>
         </div>
         <button type="submit" class="btn-primary">Actualizar</button>
     </form>

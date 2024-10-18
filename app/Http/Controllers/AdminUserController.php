@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Cliente;
 
 class AdminUserController extends Controller
 {
     public function index()
     {
-        $usuarios = User::all();
-        return view('usuarios.index', compact('usuarios'));
+        $clientes = Cliente::all();
+        return view('usuarios.index', compact('clientes'));
     }
 
     public function create()
